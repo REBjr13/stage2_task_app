@@ -9,37 +9,41 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final nameControl = new TextEditingController();
-  String _name;
+  var _name;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("App")),
       body: Container(
-        child: Center(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: nameControl,
-                  keyboardType: TextInputType.name,
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: nameControl,
+                keyboardType: TextInputType.name,
+                decoration: InputDecoration(
+                    alignLabelWithHint: true, hintText: "Enter Name"),
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _name = nameControl as String;
-                    });
-                  },
-                  child: Text("Submit")),
-              Text('Your name is $_name',
-              style: TextStyle(
-                fontSize: 20.0, fontWeight: FontWeight.bold,
-              ),
-              ),
-            ],
-          ),
+            ),
+            ElevatedButton(
+              child: Text("Submit"),
+              onPressed: () {
+                setState(() {
+                  _name = nameControl.text;
+                });
+                final snackBar = SnackBar(
+                  content: Text(
+                      "Your Name is $_name"), //Displays name using Snackbar
+                  backgroundColor: Colors.blue,
+                );
+
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+            ),
+          ],
         ),
       ),
     );
