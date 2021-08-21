@@ -15,8 +15,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("App")),
       body: Container(
+        color: Colors.grey.shade300,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
-            Image.asset("images/zuri.jpeg", height: 280.0, width: 180.0, scale: 1.0,),
+           // Image.asset("images/zurri.jpeg", height: 180.0, width: 280.0),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
@@ -58,14 +58,19 @@ class _MyAppState extends State<MyApp> {
                     onTap: () => launch('https://training.zuri.team/')),
               ),
             ),
-            Image.asset(
-              'images/zuri.jpeg',
-              width: 280,
-              height: 180,
-            )
+            ImageAsset()
           ],
         ),
       ),
     );
+  }
+}
+class ImageAsset extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+  AssetImage assetImage = AssetImage('images/zuri.jpeg');
+  Image image = Image(image: assetImage, height: 200.0, width: 200.0,);
+  return Container(child: image,);
   }
 }
